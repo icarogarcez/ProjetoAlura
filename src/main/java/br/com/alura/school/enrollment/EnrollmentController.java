@@ -5,6 +5,7 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -40,7 +41,16 @@ public class EnrollmentController {
     @GetMapping("/enrollments")
     public ResponseEntity<List<Enrollment>> allEnrollments() {
         List<Enrollment> enrollments = enrollmentRepository.findAll();
-        return ResponseEntity.ok(enrollments); //Puxando tudo só pra visualizar melhor
+        return ResponseEntity.ok(enrollments); //Puxando tudo só para visualizar melhor no Postman
+    }
+
+    @GetMapping("/courses/enroll/report")
+    ResponseEntity<List<EnrollmentReportResponse>> enrollReport() {
+        List<EnrollmentReportResponse> report = enrollmentRepository.enrollReport()
+                .stream().map(EnrollmentReportResponse::new).collect(Collectors.toList());
+
+        if (report.isEmpty()) return ResponseEntity.noContent().build();
+        return ResponseEntity.ok(report);
     }
 
     @PostMapping("/courses/{courseCode}/enroll")
