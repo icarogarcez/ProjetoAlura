@@ -119,4 +119,4 @@ Caso você tenha tempo disponível, amplie os testes automatizados tanto para a 
 02. Confusão ao setar a requisição em post, não sabia se utilizava NewEnrollment ou NewCourse no método. Solucionado ao testar no Postman (a requisição era em NewEnrollmentRequest).
 03. Banco de dados. Eu nunca havia usado o h2, ele deu erro ao adicionar a tabela de Enrollment. A solução que encontrei foi trocar a linha spring.jpa.hibernate.ddl-auto=validate para spring.jpa.hibernate.ddl-auto=update em application.properties somente para conseguir rodar localmente.
 04. Primeira vez escrevendo teste em MockMvc, segui com base naqueles que já estavam implementados.
-Dificuldade em utilizar o Query. Resolvido depois de consultar a documentação do Spring Data e reaproveitar um código antigo de listagem em outro projeto pela Generation Brasil que também usava Query.
+05. Dificuldade em utilizar o Query. Resolvido depois de consultar a documentação do Spring Data e reaproveitar um código antigo de listagem em outro projeto pela Generation Brasil que também usava Query.
