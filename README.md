@@ -113,7 +113,7 @@ Alguns pontos importantes:
 
 Caso você tenha tempo disponível, amplie os testes automatizados tanto para a funcionalidade que você implementou como para as que já estavam implementadas no projeto.
 
-### Alguns problemas enfrentados:
+### Alguns desafios enfrentados:
 
 01. Incompatibilidade com a versão do Java. Solucionado ao configurar o JAVA_HOME para a versão 11 na máquina.
 02. Confusão ao setar a requisição em post, não sabia se utilizava NewEnrollment ou NewCourse no método. Solucionado ao testar no Postman (a requisição era em NewEnrollmentRequest).
