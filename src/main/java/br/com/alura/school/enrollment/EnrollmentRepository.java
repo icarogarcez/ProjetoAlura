@@ -1,5 +1,10 @@
 package br.com.alura.school.enrollment;
 
-public interface EnrollmentRepository {
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface EnrollmentRepository extends JpaRepository<Enrollment, Long> {
     
+    List<Enrollment> findByUserIdAndCourseId(Long userId, Long courseId);
 }

@@ -4,11 +4,16 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import br.com.alura.school.enrollment.Enrollment;
+
 import static javax.persistence.GenerationType.IDENTITY;
+
+import java.util.List;
 
 @Entity
 public class User {
@@ -27,19 +32,25 @@ public class User {
     @Column(nullable = false, unique = true)
     private String email;
 
-    @Deprecated
-    protected User() {}
+    @OneToMany(mappedBy = "user")
+    private List<Enrollment> enrollments;
 
-    User(String username, String email) {
+    public User() {}
+
+    public User(String username, String email) {
         this.username = username;
         this.email = email;
     }
 
-    String getUsername() {
+    public Long getId() {
+        return id;
+    }
+
+    public String getUsername() {
         return username;
     }
 
-    String getEmail() {
+    public String getEmail() {
         return email;
     }
 

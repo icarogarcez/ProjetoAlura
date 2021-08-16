@@ -1,7 +1,8 @@
 package br.com.alura.school.enrollment;
 
-import java.time.LocalDateTime;
 import static javax.persistence.GenerationType.IDENTITY;
+
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,18 +18,18 @@ import br.com.alura.school.user.User;
 public class Enrollment {
     
     @Id
-    @GeneratedValue (strategy = IDENTITY)
+    @GeneratedValue(strategy = IDENTITY)
     private Long id;
 
-    @Column (name = "enrollment_date")
+    @Column(name = "enrollment_date")
     private LocalDateTime enrollmentDate;
 
     @ManyToOne
-    @JoinColumn (name = "course_id")
+    @JoinColumn(name = "course_id")
     private Course course;
 
     @ManyToOne
-    @JoinColumn (name = "user_id")
+    @JoinColumn(name = "user_id")
     private User user;
 
     public Enrollment() {
