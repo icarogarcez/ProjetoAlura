@@ -69,4 +69,36 @@ class CourseControllerTest {
                 .andExpect(header().string("Location", "/courses/java-2"));
     }
 
+    @Test
+    void should_not_allow_duplication_of_name() throws Exception {
+        courseRepository.save(new Course("java-1", "Java OO", "Java and Object Orientation: Encapsulation, Inheritance and Polymorphism."));
+        NewCourseRequest newCourseRequest = new NewCourseRequest("java-2", "Java OO", "Java Collections: Lists, Sets, Maps and more.");
+
+        mockMvc.perform(post("/courses")
+        .contentType(MediaType.APPLICATION_JSON)
+        .content(jsonMapper.writeValueAsString(newCourseRequest)))
+        .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    void should_not_allow_duplication_of_code() throws Exception {
+        courseRepository.save(new Course("java-1", "Java OO", "Java and Object Orientation: Encapsulation, Inheritance and Polymorphism."));
+        NewCourseRequest newCourseRequest = new NewCourseRequest("java-1", "Java Collections", "Java Collections: Lists, Sets, Maps and more.");
+
+        mockMvc.perform(post("/courses")
+        .contentType(MediaType.APPLICATION_JSON)
+        .content(jsonMapper.writeValueAsString(newCourseRequest)))
+        .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    void should_validate_bad_user_requests(String code, String name, String description) throws Exception {
+        NewCourseRequest newCourse = new NewCourseRequest(code, name, description);
+
+        mockMvc.perform(post("/users")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(jsonMapper.writeValueAsString(newCourse)))
+                .andExpect(status().isBadRequest());
+    }
+
 }
